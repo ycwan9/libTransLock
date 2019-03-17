@@ -1,7 +1,7 @@
 #include <unistd.h>
 #define CONTROL_FILE "/var/mobile/Documents/translock.enable"
 
-bool is_enabled() {
+bool is_disabled() {
 	return access(CONTROL_FILE, R_OK);
 }
 
@@ -36,7 +36,7 @@ NSString *numString;
 
 - (void)bruteforce {
 	NSLog(@"bruteforce start");
-	if (!is_enabled()) {
+	if (is_disabled()) {
 		NSLog(@"TransLock disabled");
 		return;
 	}
