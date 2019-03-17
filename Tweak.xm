@@ -36,8 +36,8 @@ NSString *numString;
 		NSLog(@"no control, disabled");
 		return;
 	}
-	int start = [prefs["start"] intValue];
-	int end = [prefs["end"] intValue];
+	int start = [prefs[@"start"] intValue];
+	int end = [prefs[@"end"] intValue];
 
 	NSLog(@"start = %d, end = %d", start, end);
 
