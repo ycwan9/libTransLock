@@ -12,11 +12,15 @@ before_install:
   - git clone --depth 1 --recursive https://github.com/theos/theos.git $THEOS
   - $THEOS/extras/ci/macos-setup.sh
 
-script: make && ls -la
+script: make
+
+before_deploy: ls -la build
+
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
-  file: "*.deb"
+  file: "build/*.deb"
   skip_cleanup: true
+  file_glob: true
   on:
     tags: true
