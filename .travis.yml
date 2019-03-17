@@ -2,6 +2,10 @@ language: objective-c
 os: osx
 sudo: false
 
+cache:
+  directories:
+    - "$HOME/Library/Caches/Homebrew"
+
 env:
   global:
     # $THEOS is absolutely needed for theos to even be found
