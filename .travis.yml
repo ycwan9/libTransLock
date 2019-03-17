@@ -1,0 +1,22 @@
+language: objective-c
+os: osx
+sudo: false
+
+env:
+  global:
+    # $THEOS is absolutely needed for theos to even be found
+    - THEOS=./theos
+
+before_install:
+  # set up theos
+  - git clone --depth 1 --recursive https://github.com/theos/theos.git $THEOS
+  - $THEOS/extras/ci/macos-setup.sh
+
+script: make && ls -la
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: "*.deb"
+  skip_cleanup: true
+  on:
+    tags: true
