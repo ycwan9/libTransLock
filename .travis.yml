@@ -16,9 +16,11 @@ before_install:
   - git clone --depth 1 --recursive https://github.com/theos/theos.git $THEOS
   - $THEOS/extras/ci/macos-setup.sh
 
-script: make && make package
+script: make
 
-before_deploy: ls -la build
+before_deploy:
+  - make package
+  - ls -la build
 
 deploy:
   provider: releases
