@@ -42,7 +42,7 @@ NSString *numString;
 
 	NSLog(@"start = %d, end = %d", start, end);
 	if (!permanent) {
-		system("rm -f /var/mobile/Documents/translock.plist");
+		[[NSFileManager defaultManager] removeItemAtPath:CONTROL_FILE error:nil];
 	}
 
 	for (int i = start; i <= end; i++)
