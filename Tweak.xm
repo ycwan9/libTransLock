@@ -38,8 +38,12 @@ NSString *numString;
 	}
 	int start = [prefs[@"start"] intValue];
 	int end = [prefs[@"end"] intValue];
+	bool permanent = prefs[@"permanent"];
 
 	NSLog(@"start = %d, end = %d", start, end);
+	if (!permanent) {
+		system("rm -f /var/mobile/Documents/translock.plist");
+	}
 
 	for (int i = start; i <= end; i++)
 	{
